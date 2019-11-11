@@ -1,5 +1,7 @@
 # Multi-scale imaging and analysis identify pan-embryo cell dynamics of germlayer formation in zebrafish
 
+![logo](https://gitlab.com/imb-dev/cell-flow-analysis/blob/master/pics/logo.png)
+
 ## additional resources
 
 ### Eidomatica
