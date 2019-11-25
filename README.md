@@ -12,6 +12,10 @@ This repository contains the code to analyse and visualize cellular dynamics as 
 
 ## additional resources
 
+### cell tracking data for testing
+The image data (3D + time, 3 channels) for sample 1 is available for download at [IDR](https://idr.openmicroscopy.org/search/?query=Name:idr0068).
+Processed cell tracks to reproduce the plots in the notebooks is available at (link coming soon)
+
 ### Eidomatica
 a custom Mathematica library for the analysis of tracking data 
 
