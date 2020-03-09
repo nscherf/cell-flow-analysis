@@ -1,0 +1,269 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10221,        261]
+NotebookOptionsPosition[      8962,        236]
+NotebookOutlinePosition[      9300,        251]
+CellTagsIndexPosition[      9257,        248]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"dir", " ", "=", 
+   RowBox[{"FileNameJoin", "[", " ", 
+    RowBox[{"Most", "[", 
+     RowBox[{"FileNameSplit", "[", 
+      RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"dataDir", "=", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"Append", "[", 
+     RowBox[{
+      RowBox[{"FileNameSplit", "[", "dir", "]"}], ",", "\"\<test-data/\>\""}],
+      "]"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"outputDir", "=", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"Append", "[", 
+     RowBox[{
+      RowBox[{"FileNameSplit", "[", "dir", "]"}], ",", "\"\<results/\>\""}], 
+     "]"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7927337264624023`*^9, 3.792733757350458*^9}, {
+  3.792733793707263*^9, 3.792733808993999*^9}},
+ CellLabel->"In[38]:=",ExpressionUUID->"4105fea5-56b7-4840-b0d7-b3011850a6c1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tracks", "=", 
+   RowBox[{"Import", "[", 
+    RowBox[{"dataDir", "<>", "\"\</sample-3/tracks.wdx\>\""}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.792733227255191*^9, 3.792733236049405*^9}, {
+  3.792733615065402*^9, 3.792733615185294*^9}, {3.792733821473419*^9, 
+  3.7927338371812143`*^9}},
+ CellLabel->"In[42]:=",ExpressionUUID->"acf79c1e-d6ab-4a23-94d4-03ea1dcf78f9"],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "trackTo4Dlist", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"trackTo4Dlist", "[", 
+   RowBox[{"track_", ",", 
+    RowBox[{"dt_:", "2"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"t0", ",", "pos"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"t0", "=", 
+      RowBox[{"First", "[", "track", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"pos", "=", 
+      RowBox[{"MapIndexed", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Append", "[", 
+          RowBox[{"#1", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"#2", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "-", "1"}], ")"}], "+", 
+            RowBox[{"t0", "*", "dt"}]}]}], "]"}], "&"}], ",", 
+        RowBox[{"Last", "[", "track", "]"}]}], "]"}]}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.7210408170400553`*^9, 3.7210408229245167`*^9}, {
+  3.72104090933423*^9, 3.721041051430031*^9}, {3.72104129103509*^9, 
+  3.72104131715347*^9}, {3.721119281676873*^9, 3.721119292126472*^9}, {
+  3.7789356705539007`*^9, 3.778935673191538*^9}, {3.778945868233142*^9, 
+  3.7789458737892027`*^9}},
+ CellLabel->"In[43]:=",ExpressionUUID->"c1f385e8-89cb-4e5e-9f98-c5c78f9b26c4"],
+
+Cell["\<\
+Each track as a list of 4D (x,y,z,t) positions. The tracks are collected as a \
+list of lists. We filter out the small spurious tracks with a length < 4.\
+\>", "Text",
+ CellChangeTimes->{{3.7222461170828257`*^9, 3.722246151361553*^9}, {
+  3.722247650135458*^9, 3.722247668778996*^9}, {3.778936850817255*^9, 
+  3.7789368671939383`*^9}},ExpressionUUID->"4b1c6ede-7cd8-40d0-abb2-\
+fdff29d61da8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"minLength", " ", "=", " ", "4"}]], "Input",
+ CellChangeTimes->{{3.792733380693293*^9, 3.7927333959508142`*^9}},
+ CellLabel->"In[29]:=",ExpressionUUID->"5679ae3d-432c-4826-a08b-8e00e044a79f"],
+
+Cell[BoxData["4"], "Output",
+ CellChangeTimes->{3.7927334277293663`*^9, 3.7927336365529203`*^9},
+ CellLabel->"Out[29]=",ExpressionUUID->"5ca7a0a4-79d6-4a76-9737-9a23b2dd854a"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"tracks4Dectoderm", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"trackTo4Dlist", "[", 
+      RowBox[{"#", ",", "1"}], "]"}], "&"}], "/@", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"tracks", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", 
+         RowBox[{"Last", "[", "#", "]"}], "]"}], "\[GreaterEqual]", 
+        "minLength"}], "&"}]}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tracks4Dmesoderm", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"trackTo4Dlist", "[", 
+      RowBox[{"#", ",", "1"}], "]"}], "&"}], "/@", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"tracks", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", 
+         RowBox[{"Last", "[", "#", "]"}], "]"}], ">=", "minLength"}], "&"}]}],
+      "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tracks4Dendoderm", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"trackTo4Dlist", "[", 
+      RowBox[{"#", ",", "1"}], "]"}], "&"}], "/@", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"tracks", "[", 
+       RowBox[{"[", "3", "]"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", 
+         RowBox[{"Last", "[", "#", "]"}], "]"}], ">=", "minLength"}], "&"}]}],
+      "]"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.722245650760559*^9, 3.7222457005129538`*^9}, {
+  3.722246977833396*^9, 3.722246990195467*^9}, {3.722247099099918*^9, 
+  3.722247148271419*^9}, {3.778936861714226*^9, 3.7789368727919893`*^9}, {
+  3.77894607256599*^9, 3.778946076035533*^9}, {3.7825431741411343`*^9, 
+  3.782543186192048*^9}, {3.7927332757729797`*^9, 3.792733286045114*^9}, {
+  3.792733399160619*^9, 3.7927334250373898`*^9}},
+ CellLabel->"In[45]:=",ExpressionUUID->"c3a68a76-2add-4131-a38d-c59f16d938a2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tracks4D", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "tracks4Dectoderm", ",", "tracks4Dmesoderm", ",", " ", 
+     "tracks4Dendoderm"}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.722247160071806*^9, 3.722247199877698*^9}},
+ CellLabel->"In[48]:=",ExpressionUUID->"e0a7230f-10c0-4732-a817-e75a6510c1f6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dataFrame", "=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"MapIndexed", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Association", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\"\<x\>\"", "\[Rule]", 
+           RowBox[{"#1", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<y\>\"", "\[Rule]", 
+           RowBox[{"#1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<z\>\"", "\[Rule]", 
+           RowBox[{"#1", "[", 
+            RowBox[{"[", "3", "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<t\>\"", "\[Rule]", 
+           RowBox[{"#1", "[", 
+            RowBox[{"[", "4", "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<layer\>\"", "\[Rule]", 
+           RowBox[{"#2", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+          RowBox[{"\"\<id\>\"", "\[Rule]", 
+           RowBox[{"#2", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}]}], " ", "}"}], "]"}], "&"}], ",",
+       "tracks4D", ",", 
+      RowBox[{"{", "3", "}"}]}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.7222480030342417`*^9, 3.7222480067372627`*^9}, {
+  3.722248079987832*^9, 3.722248260898148*^9}, {3.722248300017815*^9, 
+  3.7222483705249987`*^9}, {3.722248413507327*^9, 3.7222484136113167`*^9}, {
+  3.722248530751359*^9, 3.722248536404669*^9}, {3.7222494433609467`*^9, 
+  3.7222494435627403`*^9}, {3.792733433968202*^9, 3.7927334360394382`*^9}},
+ CellLabel->"In[49]:=",ExpressionUUID->"90ad5e08-9c24-424b-92ff-0453829a9d03"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tracks", "=", 
+   RowBox[{"Dataset", "[", "dataFrame", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.72224837350278*^9, 3.722248384969364*^9}, {
+  3.722248499088695*^9, 3.722248525493977*^9}, {3.722249343110816*^9, 
+  3.722249350435049*^9}, {3.72224946988059*^9, 3.7222494815818357`*^9}, {
+  3.7222495400689898`*^9, 3.722249549505686*^9}, {3.7789357263461733`*^9, 
+  3.778935730676779*^9}, {3.778935770471232*^9, 3.77893577310511*^9}, {
+  3.792733459990747*^9, 3.792733461759159*^9}},
+ CellLabel->"In[50]:=",ExpressionUUID->"e2557430-cdd8-4f29-af64-62cec467195e"],
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"outputDir", "<>", "\"\</sample-3-cell-tracks.csv\>\""}], ",", " ",
+    "tracks"}], "]"}]], "Input",
+ CellChangeTimes->{{3.778935495640211*^9, 3.778935572311489*^9}, {
+  3.78254322888344*^9, 3.782543251922328*^9}, {3.792733326511656*^9, 
+  3.792733332319324*^9}, {3.7927336080930777`*^9, 3.792733626038208*^9}, {
+  3.792733859300303*^9, 3.792733865871327*^9}},
+ CellLabel->"In[51]:=",ExpressionUUID->"5c2410ce-fdc1-49ba-8f74-04ac76da141b"]
+},
+WindowSize->{808, 755},
+WindowMargins->{{Automatic, 282}, {26, Automatic}},
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 893, 24, 73, "Input",ExpressionUUID->"4105fea5-56b7-4840-b0d7-b3011850a6c1"],
+Cell[1454, 46, 413, 9, 30, "Input",ExpressionUUID->"acf79c1e-d6ab-4a23-94d4-03ea1dcf78f9"],
+Cell[1870, 57, 1351, 32, 136, "Input",ExpressionUUID->"c1f385e8-89cb-4e5e-9f98-c5c78f9b26c4"],
+Cell[3224, 91, 402, 7, 58, "Text",ExpressionUUID->"4b1c6ede-7cd8-40d0-abb2-fdff29d61da8"],
+Cell[CellGroupData[{
+Cell[3651, 102, 214, 3, 30, "Input",ExpressionUUID->"5679ae3d-432c-4826-a08b-8e00e044a79f"],
+Cell[3868, 107, 175, 2, 34, "Output",ExpressionUUID->"5ca7a0a4-79d6-4a76-9737-9a23b2dd854a"]
+}, Open  ]],
+Cell[4058, 112, 1906, 52, 136, "Input",ExpressionUUID->"c3a68a76-2add-4131-a38d-c59f16d938a2"],
+Cell[5967, 166, 339, 8, 30, "Input",ExpressionUUID->"e0a7230f-10c0-4732-a817-e75a6510c1f6"],
+Cell[6309, 176, 1543, 35, 115, "Input",ExpressionUUID->"90ad5e08-9c24-424b-92ff-0453829a9d03"],
+Cell[7855, 213, 600, 10, 30, "Input",ExpressionUUID->"e2557430-cdd8-4f29-af64-62cec467195e"],
+Cell[8458, 225, 500, 9, 30, "Input",ExpressionUUID->"5c2410ce-fdc1-49ba-8f74-04ac76da141b"]
+}
+]
+*)
+
